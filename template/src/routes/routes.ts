@@ -1,7 +1,9 @@
 import { Dispatch } from 'redux'
 import { NOT_FOUND, RoutesMap, redirect, connectRoutes, Options } from 'redux-first-router'
 import { stringify, parse } from 'qs'
-import { Dictionary } from '@reduxjs/toolkit'
+import { Dictionary, Middleware } from '@reduxjs/toolkit'
+import { RootState } from 'store'
+import { UpdateQueryParamsAction } from './routes.actions'
 
 export const HOME = 'HOME'
 
@@ -45,6 +47,28 @@ const routesOptions: Options = {
     stringify: encodeWorkspace,
     parse: decodeWorkspace,
   },
+}
+
+export const routerQueryMiddleware: Middleware = ({ getState }: { getState: () => RootState }) => (
+  next
+) => (action: UpdateQueryParamsAction) => {
+  const routesActions = Object.keys(routesMap)
+  // check if action type matches a route type
+  const isRouterAction = routesActions.includes(action.type)
+  if (!isRouterAction) {
+    next(action)
+  } else {
+    const newAction: UpdateQueryParamsAction = { ...action }
+
+    const prevQuery = getState().location.query || {}
+    if (newAction.replaceQuery !== true) {
+      newAction.query = {
+        ...prevQuery,
+        ...newAction.query,
+      }
+    }
+    next(newAction)
+  }
 }
 
 export default connectRoutes(routesMap, routesOptions)

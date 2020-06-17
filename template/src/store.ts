@@ -5,9 +5,10 @@ import {
   combineReducers,
   getDefaultMiddleware,
 } from '@reduxjs/toolkit'
-import connectedRoutes from './routes/routes'
+import connectedRoutes, { routerQueryMiddleware } from './routes/routes'
 import userReducer from './features/user/user.slice'
 import mapReducer from './features/map/map.slice'
+import timebarReducer from './features/timebar/timebar.slice'
 
 const {
   reducer: location,
@@ -19,6 +20,7 @@ const {
 const rootReducer = combineReducers({
   user: userReducer,
   map: mapReducer,
+  timebar: timebarReducer,
   location: location,
 })
 
@@ -31,7 +33,11 @@ const defaultMiddlewareOptions: any = {
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: [...getDefaultMiddleware(defaultMiddlewareOptions), routerMiddleware],
+  middleware: [
+    ...getDefaultMiddleware(defaultMiddlewareOptions),
+    routerQueryMiddleware,
+    routerMiddleware,
+  ],
   enhancers: (defaultEnhancers) => [routerEnhancer, ...defaultEnhancers],
 })
 

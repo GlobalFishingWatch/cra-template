@@ -20,6 +20,8 @@ const selectQueryParam = (param: WorkspaceParam) =>
 export const selectMapZoomQuery = selectQueryParam('zoom')
 export const selectMapLatitudeQuery = selectQueryParam('latitude')
 export const selectMapLongitudeQuery = selectQueryParam('longitude')
+export const selectStartQuery = selectQueryParam('start')
+export const selectEndQuery = selectQueryParam('end')
 
 export const selectViewport = createSelector(
   [selectMapZoomQuery, selectMapLatitudeQuery, selectMapLongitudeQuery],
@@ -29,3 +31,8 @@ export const selectViewport = createSelector(
     longitude,
   })
 )
+
+export const selectTimerange = createSelector([selectStartQuery, selectEndQuery], (start, end) => ({
+  start,
+  end,
+}))
