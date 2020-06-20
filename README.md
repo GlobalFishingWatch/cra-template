@@ -7,11 +7,11 @@ To use this template, add `--template @globalfishinwatch/cra-template` when crea
 For example:
 
 ```sh
-npx create-react-app my-app --template @globalfishinwatch/cra-template
+npx create-react-app my-app --template @globalfishingwatch/cra-template
 
 # or
 
-yarn create react-app my-app --template @globalfishinwatch/cra-template
+yarn create react-app my-app --template @globalfishingwatch/cra-template
 ```
 
 For more information, please refer to:
