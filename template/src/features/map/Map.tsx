@@ -14,18 +14,20 @@ const Map = (): React.ReactElement => {
 
   return (
     <div className={styles.container}>
-      <ReactMapGL
-        width="100%"
-        height="100%"
-        latitude={viewport.latitude}
-        longitude={viewport.longitude}
-        zoom={viewport.zoom}
-        onViewportChange={onViewportChange}
-        mapStyle={style}
-        mapOptions={{
-          customAttribution: '© Copyright Global Fishing Watch 2020',
-        }}
-      ></ReactMapGL>
+      {style && (
+        <ReactMapGL
+          width="100%"
+          height="100%"
+          latitude={viewport.latitude}
+          longitude={viewport.longitude}
+          zoom={viewport.zoom}
+          onViewportChange={onViewportChange}
+          mapStyle={style}
+          mapOptions={{
+            customAttribution: '© Copyright Global Fishing Watch 2020',
+          }}
+        ></ReactMapGL>
+      )}
     </div>
   )
 }
