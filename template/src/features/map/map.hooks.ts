@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { ViewportProps } from 'react-map-gl'
 import useDebounce from '@globalfishingwatch/react-hooks/dist/use-debounce'
 import { selectViewport } from 'routes/routes.selectors'
-import { updateQueryParams } from 'routes/routes.actions'
+import { useLocationConnect } from 'routes/routes.hook'
 import { MapCoordinates } from 'types'
 import {
   selectGeneratorsConfig,
@@ -70,8 +70,8 @@ export function useDebouncedViewport(
 }
 
 export function useViewport(): UseViewport {
-  const dispatch = useDispatch()
+  const { dispatchQueryParams } = useLocationConnect()
   const urlViewport = useSelector(selectViewport)
-  const callback = useCallback((viewport) => dispatch(updateQueryParams(viewport)), [dispatch])
+  const callback = useCallback((viewport) => dispatchQueryParams(viewport), [dispatchQueryParams])
   return useDebouncedViewport(urlViewport, callback)
 }

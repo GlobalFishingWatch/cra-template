@@ -1,9 +1,10 @@
 import React from 'react'
-import ReactMapGL from 'react-map-gl'
+import { InteractiveMap } from '@globalfishingwatch/react-map-gl'
 import useLayerComposer from '@globalfishingwatch/react-hooks/dist/use-layer-composer'
 import { useGeneratorsConnect, useViewport } from './map.hooks'
-import 'mapbox-gl/dist/mapbox-gl.css'
 import styles from './Map.module.css'
+
+import '@globalfishingwatch/mapbox-gl/dist/mapbox-gl.css'
 
 const Map = (): React.ReactElement => {
   const { viewport, onViewportChange } = useViewport()
@@ -15,7 +16,7 @@ const Map = (): React.ReactElement => {
   return (
     <div className={styles.container}>
       {style && (
-        <ReactMapGL
+        <InteractiveMap
           width="100%"
           height="100%"
           latitude={viewport.latitude}
@@ -26,7 +27,7 @@ const Map = (): React.ReactElement => {
           mapOptions={{
             customAttribution: '© Copyright Global Fishing Watch 2020',
           }}
-        ></ReactMapGL>
+        ></InteractiveMap>
       )}
     </div>
   )

@@ -5,6 +5,10 @@ import { useTimerangeConnect } from 'features/timebar/timebar.hooks'
 import { DEFAULT_WORKSPACE } from 'data/config'
 import { setHighlightedTime, disableHighlightedTime } from './timebar.slice'
 
+const emptyFn = () => {
+  // Needed to avoid timeline complaining about empty children
+  return null
+}
 const TimebarWrapper = () => {
   const { start, end, dispatchTimerange } = useTimerangeConnect()
 
@@ -28,7 +32,9 @@ const TimebarWrapper = () => {
         const end = scale(clientX + 10).toISOString()
         dispatch(setHighlightedTime({ start, end }))
       }}
-    ></TimebarComponent>
+    >
+      {emptyFn}
+    </TimebarComponent>
   )
 }
 

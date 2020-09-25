@@ -1,27 +1,36 @@
 import { createSelector } from 'reselect'
+import { Query, RouteObject } from 'redux-first-router'
 import { RootState } from 'store'
 import { WorkspaceParam } from 'types'
 import { DEFAULT_WORKSPACE } from 'data/config'
+import { ROUTE_TYPES } from './routes'
 
 const selectLocation = (state: RootState) => state.location
-
-const selectLocationQuery = createSelector([selectLocation], (location) => {
-  return location.query
+export const selectCurrentLocation = createSelector([selectLocation], ({ type, routesMap }) => {
+  const routeMap = routesMap[type] as RouteObject
+  return { type: type as ROUTE_TYPES, ...routeMap }
 })
 
-const selectQueryParam = (param: WorkspaceParam) =>
-  createSelector([selectLocationQuery], (query: any) => {
+export const selectLocationQuery = createSelector(
+  [selectLocation],
+  (location) => location.query as Query
+)
+
+export const selectLocationPayload = createSelector([selectLocation], ({ payload }) => payload)
+
+const selectQueryParam = <T = any>(param: WorkspaceParam) =>
+  createSelector<RootState, Query, T>([selectLocationQuery], (query: any) => {
     if (query === undefined || query[param] === undefined) {
       return DEFAULT_WORKSPACE[param]
     }
     return query[param]
   })
 
-export const selectMapZoomQuery = selectQueryParam('zoom')
-export const selectMapLatitudeQuery = selectQueryParam('latitude')
-export const selectMapLongitudeQuery = selectQueryParam('longitude')
-export const selectStartQuery = selectQueryParam('start')
-export const selectEndQuery = selectQueryParam('end')
+export const selectMapZoomQuery = selectQueryParam<number>('zoom')
+export const selectMapLatitudeQuery = selectQueryParam<number>('latitude')
+export const selectMapLongitudeQuery = selectQueryParam<number>('longitude')
+export const selectStartQuery = selectQueryParam<string>('start')
+export const selectEndQuery = selectQueryParam<string>('end')
 
 export const selectViewport = createSelector(
   [selectMapZoomQuery, selectMapLatitudeQuery, selectMapLongitudeQuery],

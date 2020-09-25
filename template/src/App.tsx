@@ -1,6 +1,7 @@
 import React, { memo, useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import SplitView from '@globalfishingwatch/ui-components/dist/split-view'
+import Spinner from '@globalfishingwatch/ui-components/dist/spinner'
 import Login from './features/user/Login'
 import Map from './features/map/Map'
 import Timebar from './features/timebar/Timebar'
@@ -29,7 +30,9 @@ function App(): React.ReactElement {
     <Fragment>
       <Login />
       {!logged ? (
-        <div className={styles.placeholder}>Loading</div>
+        <div className={styles.placeholder}>
+          <Spinner />
+        </div>
       ) : (
         <SplitView
           isOpen={sidebarOpen}
