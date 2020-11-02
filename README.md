@@ -8,6 +8,7 @@ For example:
 
 ```sh
 npx create-react-app my-app --template @globalfishingwatch/cra-template
+npm exec create-react-app my-app --template @globalfishingwatch/cra-template
 
 # or
 
