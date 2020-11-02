@@ -1,6 +1,6 @@
 {
   "name": "@globalfishingwatch/cra-template",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "scripts": {
     "prettify": "prettier --trailing-comma es5 --single-quote --write './template/src/**/*.{ts,tsx}'",
     "lint": "eslint './template/src/**/*.{ts,tsx}'",
@@ -55,7 +55,6 @@
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.4",
-    "jest": "^24.9.0",
     "prettier": "^2.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
