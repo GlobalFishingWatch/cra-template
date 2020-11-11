@@ -1,6 +1,6 @@
 {
   "name": "@globalfishingwatch/cra-template",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "scripts": {
     "prettify": "prettier --trailing-comma es5 --single-quote --write './template/src/**/*.{ts,tsx}'",
     "lint": "eslint './template/src/**/*.{ts,tsx}'",
