@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit'
 import GFWAPI, {
-  UserData,
   getAccessTokenFromUrl,
   removeAccessTokenFromUrl,
 } from '@globalfishingwatch/api-client'
+import { UserData } from '@globalfishingwatch/api-types'
 import { AppThunk, RootState } from 'store'
 
 interface UserState {
