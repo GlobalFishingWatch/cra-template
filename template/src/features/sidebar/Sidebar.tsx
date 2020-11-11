@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Switch from '@globalfishingwatch/ui-components/dist/switch'
 import { useGeneratorsConnect } from 'features/map/map.hooks'
 import styles from './Sidebar.module.css'
@@ -10,13 +10,14 @@ function Sidebar(): React.ReactElement {
       <h2>Sidebar</h2>
       {generatorsConfig.map(({ id, visible = true }) => {
         return (
-          <Fragment key={id}>
-            <label>Toggle {id} layer visibility</label>
+          <div key={id} className={styles.row}>
             <Switch
               active={visible}
+              className={styles.switch}
               onClick={() => updateGenerator({ id, config: { visible: !visible } })}
             ></Switch>
-          </Fragment>
+            <span>Toggle {id} visibility</span>
+          </div>
         )
       })}
     </div>

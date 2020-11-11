@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit'
 import { Generators } from '@globalfishingwatch/layer-composer'
 import {
   AnyGeneratorConfig,
-  BackgroundGeneratorConfig,
+  ContextGeneratorConfig,
   BasemapGeneratorConfig,
 } from '@globalfishingwatch/layer-composer/dist/generators/types'
 import { RootState } from 'store'
@@ -15,12 +15,16 @@ export interface MapState {
 const initialState: MapState = {
   // This is the configuration eventually provided to GFW's Layer Composer in Map.tsx
   generatorsConfig: [
+    { id: 'basemap', type: Generators.Type.Basemap, visible: true } as BasemapGeneratorConfig,
     {
-      id: 'background',
-      type: Generators.Type.Background,
-      color: '#6aecf9',
-    } as BackgroundGeneratorConfig,
-    { id: 'satellite', type: Generators.Type.Basemap, visible: true } as BasemapGeneratorConfig,
+      id: 'MPA',
+      type: Generators.Type.Context,
+      visible: true,
+      layer: 'mpa',
+      // This tilesUrl could change if the dataset changes, but is a good example of api tiles
+      tilesUrl:
+        'https://gateway.api.dev.globalfishingwatch.org/v1/datasets/marine-protected-areas/user-context-layer-v1/{z}/{x}/{y}',
+    } as ContextGeneratorConfig,
   ],
 }
 
