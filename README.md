@@ -1,5 +1,7 @@
 # @globalfishinwatch/cra-template
 
+## Deprecated in favour of [nx generator](https://github.com/GlobalFishingWatch/frontend/pull/1221) within the monorepo
+
 GFW official client app started based on [Redux+TS template](https://github.com/reduxjs/cra-template-redux-typescript) for [Create React App](https://github.com/facebook/create-react-app).
 
 To use this template, add `--template @globalfishinwatch/cra-template` when creating a new app.
